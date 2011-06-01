@@ -219,7 +219,7 @@ class syntax_plugin_cli extends DokuWiki_Syntax_Plugin {
                     // Render comment if there is one
                     if ($commands[1]) {
                         $renderer->doc .= '<span class="cli_comment">' .
-                            $this->_allow_em ($renderer->_xmlEntities($this->comment_str . $commands[1])) . "</span>";
+                            $this->_allow_em ($renderer->_xmlEntities($commands[1])) . "</span>";
                   }
                   $renderer->doc .= DOKU_LF;
                 } else {
@@ -239,7 +239,7 @@ class syntax_plugin_cli extends DokuWiki_Syntax_Plugin {
                 // Render comment if there is one
                 if ($commands[1]) {
                      $renderer->doc .= '<span class="cli_comment">' .
-                        $this->_allow_em ($renderer->_xmlEntities($this->comment_str . $commands[1])) . "</span>";
+                        $this->_allow_em ($renderer->_xmlEntities($commands[1])) . "</span>";
                 }
                  $renderer->doc .= DOKU_LF;
             }
