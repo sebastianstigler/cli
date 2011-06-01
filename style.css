@@ -1,24 +1,54 @@
 /* plugin:cli */
  
+// nested CLI
+div.dokuwiki pre.cli {
+	background-color: #444444 !important;
+        border-style: dashed;
+}
+pre.cli em {
+        color: #dddd00;
+}
 .cli_output {
-	color: blue;
+	color: #63E463;
+}
+.cli_line:hover {
+        background-color: #222222 !important;
+}
+.cli_comment {
+	background-image: url(images/qmark.png);
+        background-position: 1px 3px;
+        background-repeat: no-repeat;
+        max-width: 8px;
+        min-width: 8px;
+        padding: 0 0.3em 0.05em;
+        right: 0;
+        text-indent: -9999px;
+        position: absolute;
 }
 
-.cli_comment {
-	color: brown;
+.cli_comment:hover {
+        background: #000000 none repeat  scroll 0 0 ;
+        border: 1px solid #292929;
+        max-width: 1000px;
+        text-indent: 0;
+        right: 10px;
+ //       margin: 0 0 0 -3px;
+        color: #FFFFFF;
+        position: absolute;
+//        padding: 0 0.3em 0.05em;
 }
 
 .cli_prompt {
-	color: green;
+	color: #C9C9C9;
 }
 
 .cli_command {
-	color: red;
+	color: #FFFFFF;
 }
 
 // nested CLI
-pre.cli pre.cli {
-	background-color: #F8F8F8;
+div.dokuwiki pre.cli {
+	background-color: #444444;
 }
 
 /* end plugin:cli */
