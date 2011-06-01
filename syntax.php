@@ -197,6 +197,7 @@ class syntax_plugin_cli extends DokuWiki_Syntax_Plugin {
         if ( trim($lines[count($lines)]) == "" ) unset( $lines[count($lines)] );
         foreach ($lines as $line) {
             $index = strpos($line, $this->prompt_str);
+            $renderer->doc .= '<div class="cli_line">';
             if ($index === false) {   
                 if ($this->prompt_continues) {
                   if (preg_match($this->prompt_cont, $line, $promptc) === 0) $this->prompt_continues = false;
@@ -236,6 +237,7 @@ class syntax_plugin_cli extends DokuWiki_Syntax_Plugin {
                 }
                  $renderer->doc .= DOKU_LF;
             }
+        $renderer->doc .= '</div>';
         }
     }
 }
