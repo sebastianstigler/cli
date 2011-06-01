@@ -189,6 +189,12 @@ class syntax_plugin_cli extends DokuWiki_Syntax_Plugin {
          if (!is_null($comment = $this->_extract($args, 'comment')))
              $this->comment_str = $comment;
      }
+     function _allow_em($args) {
+        //allow the <em> and </em> tag
+        $bem=str_replace('&lt;em&gt;','<em>',$args);
+        $eem=str_replace('&lt;/em&gt;','</em>',$bem);
+        return $eem;
+     }
     
     function _render_conversation($match, &$renderer) {
         $prompt_continues = false;
@@ -204,36 +210,36 @@ class syntax_plugin_cli extends DokuWiki_Syntax_Plugin {
                 }
                 if ($this->prompt_continues) {
                     // format prompt
-                    $renderer->doc .= '<span class="cli_prompt">' . $renderer->_xmlEntities($promptc[0]) . "</span>";
+                    $renderer->doc .= '<span class="cli_prompt">' . $this->_allow_em( $renderer->_xmlEntities($promptc[0]) ) . "</span>";
                     // Split line into command + optional comment (only end-of-line comments supported)
                     $command =  preg_split($this->prompt_cont, $line);
                     $commands = explode($this->comment_str, $command[1]);
                     // Render command
-                    $renderer->doc .= '<span class="cli_command">' . $renderer->_xmlEntities($commands[0]) . "</span>";
+                    $renderer->doc .= '<span class="cli_command">' . $this->_allow_em(  $renderer->_xmlEntities($commands[0]) ) . "</span>";
                     // Render comment if there is one
                     if ($commands[1]) {
                         $renderer->doc .= '<span class="cli_comment">' .
-                            $renderer->_xmlEntities($this->comment_str . $commands[1]) . "</span>";
+                            $this->_allow_em ($renderer->_xmlEntities($this->comment_str . $commands[1])) . "</span>";
                   }
                   $renderer->doc .= DOKU_LF;
                 } else {
                   // render as output
-                  $renderer->doc .= '<span class="cli_output">' . $renderer->_xmlEntities($line) . "</span>" . DOKU_LF;
+                  $renderer->doc .= '<span class="cli_output">' . $this->_allow_em( $renderer->_xmlEntities($line) ) . "</span>" . DOKU_LF;
                   $this->prompt_continues=false;
                 }
             } else {
                 $this->prompt_continues = true;
                 // format prompt
                 $prompt = substr($line, 0, $index) . $this->prompt_str;
-                $renderer->doc .= '<span class="cli_prompt">' . $renderer->_xmlEntities($prompt) . "</span>";
+                $renderer->doc .= '<span class="cli_prompt">' . $this->_allow_em( $renderer->_xmlEntities($prompt) ) . "</span>";
                 // Split line into command + optional comment (only end-of-line comments supported)
                 $commands = explode($this->comment_str, substr($line, $index + strlen($this->prompt_str)));
                 // Render command
-                 $renderer->doc .= '<span class="cli_command">' . $renderer->_xmlEntities($commands[0]) . "</span>";
+                 $renderer->doc .= '<span class="cli_command">' . $this->_allow_em( $renderer->_xmlEntities($commands[0]) ) . "</span>";
                 // Render comment if there is one
                 if ($commands[1]) {
                      $renderer->doc .= '<span class="cli_comment">' .
-                        $renderer->_xmlEntities($this->comment_str . $commands[1]) . "</span>";
+                        $this->_allow_em ($renderer->_xmlEntities($this->comment_str . $commands[1])) . "</span>";
                 }
                  $renderer->doc .= DOKU_LF;
             }
